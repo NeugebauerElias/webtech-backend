@@ -1,2 +1,7 @@
-package de.htw.webtech.web;public class UserRestController {
+package de.htw.webtech.web;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserRestController {
 }
