@@ -2,12 +2,13 @@ package de.htw.webtech.web;
 
 public class User {
 
-    int userID;
-    String username;
-    String email;
-    String password;
+    private int userID;
+    private String username;
+    private String email;
+    private String password;
 
-    public User(String username, String email, String password) {
+    public User(int userID, String username, String email, String password) {
+        this.userID = userID;
         this.username = username;
         this.email = email;
         this.password = password;

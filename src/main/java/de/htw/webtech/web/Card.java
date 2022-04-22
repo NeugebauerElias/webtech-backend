@@ -8,7 +8,6 @@ public class Card {
 
     public Card(String frontInformation, String backInformation) {
         this.frontInformation = frontInformation;
-        this.backInformation = backInformation;
     }
 
     public String getFrontInformation() {
