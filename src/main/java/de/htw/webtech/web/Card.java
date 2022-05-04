@@ -8,20 +8,21 @@ import javax.persistence.Id;
 @Entity
 public class Card {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String frontInformation;
     private String backInformation;
+
+    public Card() {}
+
 
     public Card(String frontInformation, String backInformation) {
         this.frontInformation = frontInformation;
         this.backInformation = backInformation;
     }
 
-    public Card() {
 
-    }
-
-    @Id
     public Long getId() {
         return id;
     }
