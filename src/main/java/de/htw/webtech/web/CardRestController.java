@@ -9,12 +9,12 @@ public class CardRestController {
     @Autowired
     CardService service;
 
-    @PostMapping("/things")
+    @PostMapping("/cards")
     public Card createCard(@RequestBody Card card){
         return service.save(card);
     }
 
-    @GetMapping("/things/{id}")
+    @GetMapping("/cards/{id}")
     public Card getCard(@PathVariable String id){
         Long cardId = Long.parseLong(id);
         return service.get(cardId);
