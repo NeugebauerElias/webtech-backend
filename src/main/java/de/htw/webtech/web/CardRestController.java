@@ -3,8 +3,19 @@ package de.htw.webtech.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class CardRestController {
+
+    private List<Card> cardList;
+
+    public CardRestController() {
+        cardList =new ArrayList<>();
+        cardList.add(new Card("Max", "max@web.de"));
+        cardList.add(new Card("Lilly", "lilly@web.de"));
+    }
 
     @Autowired
     CardService service;
