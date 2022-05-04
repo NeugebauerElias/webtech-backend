@@ -17,6 +17,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	runtimeOnly 'org.postgresql:postresql:42.3.1'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.7'
+
 }
 
 tasks.named('test') {
