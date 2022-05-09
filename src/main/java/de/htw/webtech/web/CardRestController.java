@@ -12,9 +12,6 @@ public class CardRestController {
     private List<Card> cardList;
 
     public CardRestController() {
-        cardList =new ArrayList<>();
-        cardList.add(new Card("Max", "max@web.de"));
-        cardList.add(new Card("Lilly", "lilly@web.de"));
     }
 
     @Autowired
