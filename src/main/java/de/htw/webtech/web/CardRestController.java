@@ -33,4 +33,10 @@ public class CardRestController {
         Long cardId = Long.parseLong(id);
         return service.get(cardId);
     }
+
+    @DeleteMapping(path = "/cards/{id}")
+    public void deleteCard(@PathVariable("id") Long id) {
+        service.deleteCard(id);
+    }
+
 }

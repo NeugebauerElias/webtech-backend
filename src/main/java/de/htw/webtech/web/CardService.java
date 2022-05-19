@@ -16,4 +16,14 @@ public class CardService {
     public Card get(Long id) {
         return repo.findById(id).orElseThrow(() -> new RuntimeException());
     }
+
+    public void deleteCard(Long id) {
+        boolean exists = repo.existsById(id);
+        if (!exists){
+            throw new IllegalStateException(
+                    "card with id " + id + " does not exist"
+            );
+        }
+        repo.deleteById(id);
+    }
 }

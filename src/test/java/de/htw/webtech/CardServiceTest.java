@@ -1,4 +1,3 @@
-package de.htw.webtech;
 
 import de.htw.webtech.web.Card;
 import de.htw.webtech.web.CardRepository;
