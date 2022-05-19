@@ -3,27 +3,42 @@ package de.htw.webtech.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CardService {
 
     @Autowired
-    CardRepository repo;
+    private final CardRepository cardRepository;
 
+    public CardService (CardRepository cardRepository)  {
+        this.cardRepository = cardRepository;
+    }
     public Card save(Card card) {
-        return repo.save(card);
+        return cardRepository.save(card);
     }
 
     public Card get(Long id) {
-        return repo.findById(id).orElseThrow(() -> new RuntimeException());
+        return cardRepository.findById(id).orElseThrow(() -> new RuntimeException());
     }
 
+    public List<Card> findAll(){
+        List<Card> cards = (List<Card>) cardRepository.findAll();
+        return cards.stream().map(card -> new Card(
+                card.getBackInformation(),
+                card.getFrontInformation()
+        )).collect(Collectors.toList());
+    }
+}
+
     public void deleteCard(Long id) {
-        boolean exists = repo.existsById(id);
+        boolean exists = cardRepository.existsById(id);
         if (!exists){
             throw new IllegalStateException(
                     "card with id " + id + " does not exist"
             );
         }
-        repo.deleteById(id);
+        cardRepository.deleteById(id);
     }
 }

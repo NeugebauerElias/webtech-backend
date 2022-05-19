@@ -1,6 +1,7 @@
 package de.htw.webtech.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,32 +12,36 @@ import java.util.List;
 public class CardRestController {
 
     private List<Card> cardList;
+    public CardService cardService;
 
-    public CardRestController() {
+    public CardRestController(CardService cardService) {
+        this.cardService = cardService;
     }
 
-    @Autowired
-    CardService service;
-
     @GetMapping("/")
-    public ModelAndView showHelloWorld() {
+    public ModelAndView showHomeScreen() {
         return new ModelAndView("home");
     }
 
-    @PostMapping("/cards")
+    @PostMapping("/card")
     public Card createCard(@RequestBody Card card){
-        return service.save(card);
+        return cardService.save(card);
     }
 
     @GetMapping("/cards/{id}")
     public Card getCard(@PathVariable String id){
         Long cardId = Long.parseLong(id);
-        return service.get(cardId);
+        return cardService.get(cardId);
+    }
+
+    @GetMapping("/cards")
+    public ResponseEntity<List<Card>>getAllCards(){
+        return ResponseEntity.ok(cardService.findAll());
     }
 
     @DeleteMapping(path = "/cards/{id}")
     public void deleteCard(@PathVariable("id") Long id) {
-        service.deleteCard(id);
+        cardService.deleteCard(id);
     }
 
 }
