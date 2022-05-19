@@ -45,4 +45,9 @@ public class CardRestController {
         cardService.deleteCard(id);
     }
 
+    @PutMapping("/cards/{id}")
+    public void updateCard(@PathVariable("id") Long id, @RequestBody Card card) {
+        cardService.updateCard(id, card);
+    }
+
 }

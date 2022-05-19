@@ -1,6 +1,7 @@
 package de.htw.webtech.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,13 +26,12 @@ public class CardService {
 
     public List<Card> findAll(){
         List<Card> cards = (List<Card>) cardRepository.findAll();
-        return cards.stream().map(card -> new Card(
-                card.getBackInformation(),
-                card.getFrontInformation()
-        )).collect(Collectors.toList());
+        if(cards != null) {
+            return cards;
+        }else{
+            throw new RuntimeException("No Cards Existing");
+        }
     }
-
-
     public void deleteCard(Long id) {
         boolean exists = cardRepository.existsById(id);
         if (!exists){
@@ -40,5 +40,15 @@ public class CardService {
             );
         }
         cardRepository.deleteById(id);
+    }
+
+    public Card updateCard(Long id, Card card) {
+        boolean exists = cardRepository.existsById(id);
+        if (!exists){
+            throw new IllegalStateException(
+                    "card with id: " + id + " does not exist"
+            );
+        }
+        return cardRepository.save(card);
     }
 }
