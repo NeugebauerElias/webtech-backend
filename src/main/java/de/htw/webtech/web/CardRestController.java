@@ -12,6 +12,7 @@ import java.util.List;
 public class CardRestController {
 
     private List<Card> cardList;
+    @Autowired
     public CardService cardService;
 
     public CardRestController(CardService cardService) {
@@ -39,7 +40,7 @@ public class CardRestController {
         return ResponseEntity.ok(cardService.findAll());
     }
 
-    @DeleteMapping(path = "/cards/{id}")
+    @DeleteMapping("/cards/{id}")
     public void deleteCard(@PathVariable("id") Long id) {
         cardService.deleteCard(id);
     }

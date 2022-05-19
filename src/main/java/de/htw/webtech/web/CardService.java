@@ -30,7 +30,7 @@ public class CardService {
                 card.getFrontInformation()
         )).collect(Collectors.toList());
     }
-}
+
 
     public void deleteCard(Long id) {
         boolean exists = cardRepository.existsById(id);

@@ -22,8 +22,6 @@ public class Card {
         this.frontInformation = frontInformation;
         this.backInformation = backInformation;
     }
-
-
     public Long getId() {
         return id;
     }
