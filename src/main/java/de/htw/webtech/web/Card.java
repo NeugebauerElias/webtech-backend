@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Card {
-
+//Karteikarte
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
