@@ -15,6 +15,10 @@ public class Card {
     @Column(nullable = false)
     private String backInformation;
 
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Album album;
+
     public Card() {}
 
 
