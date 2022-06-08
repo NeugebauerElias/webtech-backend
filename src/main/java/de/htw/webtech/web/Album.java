@@ -2,7 +2,9 @@ package de.htw.webtech.web;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Album {
@@ -15,11 +17,10 @@ public class Album {
     private String name;
 
     @OneToMany(mappedBy = "Card")
-    private List<Card> cards;
+    private Set<Card> cards;
 
     public Album(String name) {
         this.name = name;
-        this.cards = new ArrayList<>();
     }
     public Album() {}
 
@@ -39,11 +40,11 @@ public class Album {
         this.name = name;
     }
 
-    public List<Card> getCards() {
+    public Set<Card> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
 }
