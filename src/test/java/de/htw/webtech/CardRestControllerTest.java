@@ -1,4 +1,4 @@
-package de.htw.webtech;
+/*package de.htw.webtech;
 
 import de.htw.webtech.web.Card;
 import de.htw.webtech.web.CardRestController;
@@ -45,3 +45,4 @@ public class CardRestControllerTest {
 
     }
 }
+*/
