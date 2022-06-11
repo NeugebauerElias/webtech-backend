@@ -3,7 +3,7 @@ package de.htw.webtech.web;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "card")
+@Table(name = "card", schema = "myApp")
 public class Card {
 //Karteikarte
     @Id
