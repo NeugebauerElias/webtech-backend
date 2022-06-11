@@ -3,6 +3,7 @@ package de.htw.webtech.web;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "card")
 public class Card {
 //Karteikarte
     @Id
@@ -15,8 +16,8 @@ public class Card {
     @Column(nullable = false)
     private String backInformation;
 
-    @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "album_id", nullable = false)
     private Album album;
 
     public Card() {}

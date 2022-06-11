@@ -8,12 +8,12 @@ public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long albumId;
 
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "Card")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Card> cards;
 
     public Album(String name) {
@@ -21,12 +21,8 @@ public class Album {
     }
     public Album() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Long getAlbumId() {
+        return albumId;
     }
 
     public String getName() {
