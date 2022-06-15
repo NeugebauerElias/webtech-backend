@@ -17,7 +17,7 @@ public class Card {
     private String backInformation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "album_id",referencedColumnName = "albumId")
+    @JoinColumn(name = "album_id",referencedColumnName = "album_Id")
     private Album album;
 
     public Card() {}
