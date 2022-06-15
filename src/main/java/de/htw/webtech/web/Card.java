@@ -51,4 +51,11 @@ public class Card {
         this.backInformation = backInformation;
     }
 
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
 }
