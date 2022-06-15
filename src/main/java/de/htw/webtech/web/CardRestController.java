@@ -15,6 +15,9 @@ public class CardRestController {
     @Autowired
     public CardService cardService;
 
+    @Autowired
+    public AlbumRepository albumRepository;
+
     public CardRestController(CardService cardService) {
         this.cardService = cardService;
     }
@@ -24,7 +27,7 @@ public class CardRestController {
         return new ModelAndView("home");
     }
 
-    @PostMapping("/card")
+    @PostMapping("/album/{albumId}card")
     public Card createCard(@RequestBody Card card){
         return cardService.save(card);
     }
