@@ -1,5 +1,7 @@
 package de.htw.webtech.web;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,8 +18,9 @@ public class Card {
     @Column(nullable = false)
     private String backInformation;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "album_id",referencedColumnName = "album_Id")
+    @JoinColumn(name = "album_id")
     private Album album;
 
     public Card() {}
