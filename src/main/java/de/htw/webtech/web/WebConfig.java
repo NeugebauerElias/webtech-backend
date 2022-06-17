@@ -1,4 +1,4 @@
-package de.htw.webtech.web.config;
+package de.htw.webtech.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("*")
+        registry.addMapping("/**")
                 .allowedMethods("*")
                 .allowedOrigins(
                         "http://localhost:3000",
