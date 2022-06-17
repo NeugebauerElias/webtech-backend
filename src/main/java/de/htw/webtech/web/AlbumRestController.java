@@ -1,6 +1,7 @@
 package de.htw.webtech.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,14 @@ public class AlbumRestController {
         return albumRepository.findById(albumId).map(album -> {
             album.setName(albumRequest.getName());
             return albumRepository.save(album);
+        }).orElseThrow(() -> new RuntimeException("AlbumId " + albumId + " not found"));
+    }
+
+    @DeleteMapping("album/{albumId}")
+    public ResponseEntity<?> deleteAlbum(@PathVariable Long albumId){
+        return albumRepository.findById(albumId).map(album -> {
+            albumRepository.delete(album);
+            return ResponseEntity.ok().build();
         }).orElseThrow(() -> new RuntimeException("AlbumId " + albumId + " not found"));
     }
 }
