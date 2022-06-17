@@ -29,4 +29,14 @@ public class AlbumService {
             throw new RuntimeException("No Alben exist");
         }
     }
+
+    public void delete(Long id) {
+        boolean exists = albumRepository.existsById(id);
+        if (!exists){
+            throw new IllegalStateException(
+                    "Album with id " + id + " does not exist"
+            );
+        }
+        albumRepository.deleteById(id);
+    }
 }

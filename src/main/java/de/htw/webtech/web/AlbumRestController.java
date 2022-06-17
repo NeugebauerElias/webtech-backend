@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class AlbumRestController {
 
@@ -22,6 +24,11 @@ public class AlbumRestController {
     public Album getAlbum(@PathVariable String id){
         Long albumId = Long.parseLong(id);
         return albumService.get(albumId);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Album>> getAll() {
+        return ResponseEntity.ok(albumService.findAll());
     }
 
     @PostMapping("/album")
