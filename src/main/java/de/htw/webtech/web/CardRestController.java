@@ -42,7 +42,7 @@ public class CardRestController {
         Long cardId = Long.parseLong(id);
         return cardService.get(cardId);
     }
-    
+
 
     @DeleteMapping("/cards/{id}")
     public void deleteCard(@PathVariable("id") Long id) {
