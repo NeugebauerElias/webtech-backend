@@ -26,7 +26,7 @@ public class AlbumRestController {
         return albumService.get(albumId);
     }
 
-    @GetMapping
+    @GetMapping("/album")
     public ResponseEntity<List<Album>> getAll() {
         return ResponseEntity.ok(albumService.findAll());
     }

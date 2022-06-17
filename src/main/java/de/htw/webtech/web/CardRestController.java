@@ -18,15 +18,13 @@ public class CardRestController {
     public CardService cardService;
 
     @Autowired
+    public CardRepository cardRepository;
+
+    @Autowired
     public AlbumRepository albumRepository;
 
     public CardRestController(CardService cardService) {
         this.cardService = cardService;
-    }
-
-    @GetMapping("/")
-    public ModelAndView showHomeScreen() {
-        return new ModelAndView("home");
     }
 
     @PostMapping("/album/{albumId}/card")
@@ -44,13 +42,7 @@ public class CardRestController {
         Long cardId = Long.parseLong(id);
         return cardService.get(cardId);
     }
-
-
-
-    @GetMapping("/cards")
-    public ResponseEntity<List<Card>>getAllCards(){
-        return ResponseEntity.ok(cardService.findAll());
-    }
+    
 
     @DeleteMapping("/cards/{id}")
     public void deleteCard(@PathVariable("id") Long id) {
