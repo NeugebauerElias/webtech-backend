@@ -45,6 +45,8 @@ public class CardRestController {
         return cardService.get(cardId);
     }
 
+
+
     @GetMapping("/cards")
     public ResponseEntity<List<Card>>getAllCards(){
         return ResponseEntity.ok(cardService.findAll());

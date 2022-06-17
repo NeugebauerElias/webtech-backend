@@ -10,6 +10,9 @@ public class AlbumRestController {
     @Autowired
     public final AlbumService albumService;
 
+    @Autowired
+    public AlbumRepository albumRepository;
+
     public AlbumRestController(AlbumService albumService) {
         this.albumService = albumService;
     }
@@ -23,5 +26,13 @@ public class AlbumRestController {
     @PostMapping("/album")
     public Album createAlbum(@RequestBody Album album) {
             return albumService.save(album);
+    }
+
+    @PutMapping("/album/{albumId}")
+    public Album updateAlbum(@PathVariable Long albumId, @RequestBody Album albumRequest) {
+        return albumRepository.findById(albumId).map(album -> {
+            album.setName(albumRequest.getName());
+            return albumRepository.save(album);
+        }).orElseThrow(() -> new RuntimeException("AlbumId " + albumId + " not found"));
     }
 }
