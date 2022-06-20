@@ -31,11 +31,18 @@ public class CardRestControllerTest {
     public void testGetRoute() throws Exception {
         // Test data and service moc
         Card c1 = new Card("flasche", "bottle");
+        Album a1 = new Album("album");
         c1.setId(24L);
+        a1.setId(1L);
+        c1.setAlbum(a1);
+
         when(service.get(24L)).thenReturn(c1);
 
         // Expected Result
-        String expected = "{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}";
+        String expected = "{\n" +
+                "\"albumId\": 1,\n" +
+                "\"name\": \"album\",\n" +
+                "\"cards\": [{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}]}";
 
         // Call and comparison
         this.mockMvc.perform(get("/cards/24"))
@@ -58,8 +65,11 @@ public class CardRestControllerTest {
         when(albumService.get(a1.getAlbumId())).thenReturn(a1);
 
         // Expected Result
-        String expected = "{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}" +
-                "{\"id\":25,\"frontInformation\":\"Dino\",\"backInformation\":\"Trex\"}";
+        String expected = "{\"albumId\": 1,\n" +
+                "\"name\":\"Spanisch\"," +
+                "\"cards\": [{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}" +
+                "{\"id\":25,\"frontInformation\":\"Dino\",\"backInformation\":\"Trex\"}]\n" +
+                "}";
 
         // Call and comparison
         this.mockMvc.perform(get("/album/1"))
