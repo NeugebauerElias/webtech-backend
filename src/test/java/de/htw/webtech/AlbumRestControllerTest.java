@@ -16,34 +16,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CardRestController.class)
-public class CardRestControllerTest {
+public class AlbumRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CardService service;
-
-    @MockBean
-    private AlbumService albumService;
-
-    @Test
-    public void testGetRoute() throws Exception {
-        // Test data and service moc
-        Card c1 = new Card("flasche", "bottle");
-        c1.setId(24L);
-        when(service.get(24L)).thenReturn(c1);
-
-        // Expected Result
-        String expected = "{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}";
-
-        // Call and comparison
-        this.mockMvc.perform(get("/cards/24"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(containsString(expected)));
-
-    }
+    private AlbumService service;
 
     @Test
     public void testGetAlbum() throws Exception {
@@ -51,11 +30,12 @@ public class CardRestControllerTest {
         Card c1 = new Card("flasche", "bottle");
         Card c2 = new Card("Dino", "Trex");
         Album a1 = new Album("album");
+        a1.setId(1L);
         c1.setId(24L);
         c1.setAlbum(a1);
         c2.setId(25L);
         c2.setAlbum(a1);
-        when(albumService.get(a1.getAlbumId())).thenReturn(a1);
+        when(service.get(1L)).thenReturn(a1);
 
         // Expected Result
         String expected = "{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}" +

@@ -1,5 +1,6 @@
-/*package de.htw.webtech;
+package de.htw.webtech;
 
+import de.htw.webtech.web.Album;
 import de.htw.webtech.web.Card;
 import de.htw.webtech.web.CardRepository;
 import de.htw.webtech.web.CardService;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class CardServiceTest {
@@ -25,15 +27,12 @@ public class CardServiceTest {
 
     @Test
     @DisplayName("should find a card by ts id")
-    void testGet(){
+    void testGetCard(){
         var c1 = new Card("Löwe", "Lion");
-        var c2 = new Card("Hund", "Dog");
         doReturn(Optional.of(c1)).when(repository).findById(3L);
-        doReturn(Optional.of(c2)).when(repository).findById(4L);
 
         Card actual = service.get(3L);
         assertEquals(actual.getBackInformation(), "Lion");
     }
-
 }
-*/
+

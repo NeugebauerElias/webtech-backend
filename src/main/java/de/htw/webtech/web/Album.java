@@ -26,6 +26,10 @@ public class Album {
         return albumId;
     }
 
+    public void setId(Long id) {
+        this.albumId = id;
+    }
+
     public String getName() {
         return name;
     }
