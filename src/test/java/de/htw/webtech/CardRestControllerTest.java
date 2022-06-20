@@ -1,4 +1,4 @@
-/*package de.htw.webtech;
+package de.htw.webtech;
 
 import de.htw.webtech.web.*;
 import org.junit.jupiter.api.Test;
@@ -27,6 +27,12 @@ public class CardRestControllerTest {
     @MockBean
     private AlbumService albumService;
 
+    @MockBean
+    private CardRepository cardRepository;
+
+    @MockBean
+    private AlbumRepository albumRepository;
+
     @Test
     public void testGetRoute() throws Exception {
         // Test data and service moc
@@ -51,6 +57,7 @@ public class CardRestControllerTest {
         Card c1 = new Card("flasche", "bottle");
         Card c2 = new Card("Dino", "Trex");
         Album a1 = new Album("album");
+        a1.setId(2L);
         c1.setId(24L);
         c1.setAlbum(a1);
         c2.setId(25L);
@@ -69,4 +76,4 @@ public class CardRestControllerTest {
 
     }
 }
-*/
+
