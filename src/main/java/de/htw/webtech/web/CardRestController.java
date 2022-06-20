@@ -38,6 +38,7 @@ public class CardRestController {
 
 
     @GetMapping("/cards/{id}")
+    @ResponseBody
     public Card getCard(@PathVariable String id){
         Long cardId = Long.parseLong(id);
         return cardService.get(cardId);
