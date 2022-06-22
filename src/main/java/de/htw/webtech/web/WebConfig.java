@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedOrigins(
                         "http://localhost:3000",
-                        "https://webtech-indexcards.herokuapp.com/"
+                        "https://webtech-flashcard-frontend.herokuapp.com/"
                 );
     }
 }
