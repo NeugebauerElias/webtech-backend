@@ -22,31 +22,33 @@ public class AlbumRestControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
+    private CardRestController cardRestController;
+
+    @MockBean
     private AlbumService service;
 
     @Test
-    public void testGetAlbum() throws Exception {
+    public void testGetRoute() throws Exception {
         // Test data and service moc
-        Card c1 = new Card("flasche", "bottle");
-        Card c2 = new Card("Dino", "Trex");
-        Album a1 = new Album("album");
-        a1.setId(1L);
-        c1.setId(24L);
-        c1.setAlbum(a1);
-        c2.setId(25L);
-        c2.setAlbum(a1);
-        when(service.get(1L)).thenReturn(a1);
+        Album a1 = new Album("Music");
+        a1.setId(11L);
+        a1.setCards(null);
+        when(service.get(11L)).thenReturn(a1);
 
         // Expected Result
-        String expected = "{\"id\":24,\"frontInformation\":\"flasche\",\"backInformation\":\"bottle\"}" +
-                "{\"id\":25,\"frontInformation\":\"Dino\",\"backInformation\":\"Trex\"}";
+        String expected = """
+                {
+                    "albumId": 9,
+                    "name": "Music",
+                    "cards": null
+                }""";
 
         // Call and comparison
-        this.mockMvc.perform(get("/album/1"))
+        this.mockMvc.perform(get("/album/11"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(containsString(expected)));
 
     }
-}
-*/
+}*/
+

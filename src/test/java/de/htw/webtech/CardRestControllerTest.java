@@ -47,6 +47,6 @@ public class CardRestControllerTest {
                 .andExpect(content().string(containsString(expected)));
 
     }
-    
+
 }
 
