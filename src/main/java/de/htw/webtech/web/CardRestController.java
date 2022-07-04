@@ -46,8 +46,11 @@ public class CardRestController {
 
 
     @DeleteMapping("/cards/{id}")
-    public void deleteCard(@PathVariable("id") Long id) {
-        cardService.deleteCard(id);
+    public ResponseEntity<?> deleteCard(@PathVariable("id") Long id) {
+        return cardRepository.findById(id).map(card -> {
+            cardRepository.delete(card);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new RuntimeException("AlbumId " + id + " not found"));
     }
 
     @PutMapping("/cards/{id}")

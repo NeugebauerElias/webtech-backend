@@ -1,19 +1,18 @@
 package de.htw.webtech;
 
 import de.htw.webtech.web.*;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import java.util.Optional;
+
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -53,16 +52,10 @@ public class CardRestControllerTest {
     }
 
     @Test
-    @DisplayName("should return 404 if card is not found")
-    void should_return_404_if_card_is_not_found() throws Exception {
-        // given
-        doReturn(null).when(service).get(anyLong());
-
-        // when
-        mockMvc.perform(get("/card/123"))
-                // then
-                .andExpect(status().isNotFound());
+    public void deleteCard() {
+        Card c1 = new Card("flasche", "bottle");
+        c1.setId(24L);
+        Mockito.when(cardRepository.findById(24L)).thenReturn(Optional.of(c1)).thenReturn(null);
     }
-
 }
 
