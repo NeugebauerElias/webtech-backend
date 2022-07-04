@@ -54,7 +54,7 @@ public class CardRestControllerTest {
 
     @Test
     @DisplayName("should return 404 if card is not found")
-    void should_return_404_if_person_is_not_found() throws Exception {
+    void should_return_404_if_card_is_not_found() throws Exception {
         // given
         doReturn(null).when(service).get(anyLong());
 
