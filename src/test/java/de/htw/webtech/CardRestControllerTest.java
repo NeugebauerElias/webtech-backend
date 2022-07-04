@@ -1,6 +1,7 @@
 package de.htw.webtech;
 
 import de.htw.webtech.web.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,6 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -47,6 +50,18 @@ public class CardRestControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string(containsString(expected)));
 
+    }
+
+    @Test
+    @DisplayName("should return 404 if card is not found")
+    void should_return_404_if_person_is_not_found() throws Exception {
+        // given
+        doReturn(null).when(service).get(anyLong());
+
+        // when
+        mockMvc.perform(get("/card/123"))
+                // then
+                .andExpect(status().isNotFound());
     }
 
 }

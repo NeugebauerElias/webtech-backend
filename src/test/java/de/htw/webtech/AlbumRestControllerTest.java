@@ -2,6 +2,7 @@ package de.htw.webtech;
 
 
 import de.htw.webtech.web.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -32,6 +33,7 @@ public class AlbumRestControllerTest {
     private WebTestClient webTestClient;
 
     @Test
+    @DisplayName("should add a new album")
     void testCreateAlbum() {
         Album album = new Album("Web");
         album.setId(1L);
