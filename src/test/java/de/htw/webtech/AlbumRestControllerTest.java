@@ -1,54 +1,51 @@
-/*package de.htw.webtech;
+package de.htw.webtech;
+
 
 import de.htw.webtech.web.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-
-
-import static org.hamcrest.Matchers.containsString;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.BodyInserters;
+import reactor.core.publisher.Mono;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CardRestController.class)
+
+import static org.mockito.Mockito.times;
+
+@ExtendWith(SpringExtension.class)
+@WebFluxTest(controllers = AlbumRestController.class)
+@Import(AlbumService.class)
 public class AlbumRestControllerTest {
 
+    @MockBean
+    AlbumRepository albumRepository;
+
     @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private CardRestController cardRestController;
-
-    @MockBean
-    private AlbumService service;
+    private WebTestClient webTestClient;
 
     @Test
-    public void testGetRoute() throws Exception {
-        // Test data and service moc
-        Album a1 = new Album("Music");
-        a1.setId(11L);
-        a1.setCards(null);
-        when(service.get(11L)).thenReturn(a1);
+    void testCreateAlbum() {
+        Album album = new Album("Web");
+        album.setId(1L);
+        album.setCards(null);
 
-        // Expected Result
-        String expected = """
-                {
-                    "albumId": 9,
-                    "name": "Music",
-                    "cards": null
-                }""";
+        Mockito.when(albumRepository.save(album)).thenReturn(album);
 
-        // Call and comparison
-        this.mockMvc.perform(get("/album/11"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(containsString(expected)));
+        webTestClient.post()
+                .uri("/album")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(album))
+                .exchange()
+                .expectStatus().isCreated();
 
+        Mockito.verify(albumRepository, times(1)).save(ArgumentMatchers.refEq(album));
     }
-}*/
-
+}

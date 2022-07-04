@@ -5,19 +5,25 @@ import de.htw.webtech.web.AlbumRepository;
 import de.htw.webtech.web.AlbumService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 @SpringBootTest
 public class AlbumServiceTest {
 
-    @Autowired
+    @InjectMocks
     private AlbumService service;
 
     @MockBean
@@ -33,4 +39,5 @@ public class AlbumServiceTest {
         assertEquals(actual.getName(), "Musik");
 
     }
+
 }

@@ -1,6 +1,7 @@
 package de.htw.webtech.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +33,9 @@ public class AlbumRestController {
     }
 
     @PostMapping("/album")
-    public Album createAlbum(@RequestBody Album album) {
-            return albumService.save(album);
+    public ResponseEntity<Album> createAlbum(@RequestBody Album album) {
+        albumService.save(album);
+        return new ResponseEntity<>(album, HttpStatus.CREATED);
     }
 
     @PutMapping("/album/{albumId}")
